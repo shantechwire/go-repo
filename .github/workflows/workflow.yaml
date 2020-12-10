@@ -13,3 +13,21 @@ jobs:
     steps:
     - name: Hello World!
       run: echo "Hello World"
+
+  deploy:
+    needs: [Hello]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: SSH and deploy node app
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        
+        script: |
+          cd ~/godemo/
+          git pull origin master
+          go run ~/godemo/hello/hello.go
