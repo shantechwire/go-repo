@@ -1,11 +1,13 @@
-on: push
-name: My cool Action
-jobs:
-          checks:
-                      name: run
-                          runs-on: ubuntu-latest
-                              steps:
-                                          - uses: actions/checkout@master
+ Simple Job
+on:
+push:
+branches:
+- master
 
-                                                - name: run
-                                                        uses: cedrickring/golang-action@1.6.0
+
+jobs:
+Hello:
+runs-on: ubuntu-18.04
+steps:
+- name: Hello World!
+run: echo "Hello World"
